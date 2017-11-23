@@ -1,0 +1,101 @@
+<!Doctype html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="mystyle.css">
+My To Do List!!! 
+</head>
+<body>
+	<div id="first" class="header">
+	<h3>To Do...</h3>
+	<input type="text" id="myInp" placeholder="Add on"></input>
+	<span onclick="newElement()" class="addBtn">Add</span>
+
+	</div>
+<ul id="second">
+	<ol>Hit The Gym</ol>
+	<ol class="checked">Pay the bills</ol>
+	<ol>Buy eggs</ol>
+	<ol>Read a book</ol>
+	<ol>Organize office</ol>
+	<ol>Reply to an e-mail</ol>
+</ul>
+
+
+<!--javascript code goes here-->
+
+<script>
+//close button event
+var list=document.getElementsByTagName("OL"); //for the 'ol' elements
+var i;						//declaring var i which is undefined
+for(i=0;i<list.length;i++)			//it runs the loop till the length of 'ol' items(n-1)
+{
+	var span=document.createElement("SPAN");
+	var txt = document.createTextNode("\u00D7");
+	span.className= "close";
+	span.appendChild(txt);
+	list[i].appendChild(span);		//close btn is append to each and every item
+}
+
+//hide the 'ol' item when clicked on 'close' button
+
+var close=document.getElementsByClassName("close"); //
+var i;
+for(i=0;i<close.length;i++)
+{
+	close[i].onclick=function()	//for hiding when clicked on close button
+	{
+		var div = this.parentElement;
+		div.style.display="none";
+	}
+}
+
+
+//to strike out the item when clicked on it
+
+var list=document.querySelector('ul');
+list.addEventListener('click',function(ev)
+{
+if(ev.target.tagName === 'LI')
+{
+	ev.target.classList.toggle('checked');
+}
+}, false);
+
+
+//to insert into items to the list when clicked on add btn
+
+function newElement()
+{
+	var ol=document.createElement("ol");	//creates the element in 'ol' fashion
+	var inputValue = document.getElementById("myInp").value; //takes the i/p from user
+	var t = document.createTextNode(inputValue); //stores the i/p value into var t by converting into text
+	ol.appendChild(t);	//appends the text to the 'ol'
+	if(inputValue === '')			//if the value is null 
+	{alert("enter something!");}		//dialogue box will display showing the alert msg
+	else{document.getElementById("second").appendChild(ol);} //the i/p entered by user is appended to the initially created 'ol' items
+	document.getElementById("myInp").value = ''; //done using the 'id' 
+
+
+//to display the close btn for newly added item to the list
+
+	var span = document.createElement("SPAN");
+	var txt= document.createTextNode("\u00D7");
+	span.className = "close";			//for close button
+	span.appendChild(txt);
+	ol.appendChild(span);
+//
+	for(i=0;i<close.length;i++)
+	{
+		close[i].onclick=function()	//for hiding the item when clicked on close btn
+		{
+			var div = this.parentElement; //it will hide the particular item whn clicked on 'close' btn
+			div.style.display = "none";
+		}
+	}
+}
+
+
+
+</script>
+</body>
+</html>
